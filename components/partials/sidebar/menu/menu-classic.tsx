@@ -33,10 +33,7 @@ export function MenuClassic({ }) {
     const t = useTranslations("Menu")
     const pathname = usePathname();
     const params = useParams<{ locale: string; }>();
-    const direction = getLangDir(params?.locale ?? '');
-
     const isDesktop = useMediaQuery('(min-width: 1280px)')
-
 
     const menuList = getMenuList(pathname, t);
     const [config, setConfig] = useConfig()
@@ -70,20 +67,8 @@ export function MenuClassic({ }) {
 
 
 
-            <ScrollArea className="[&>div>div[style]]:block!" dir={direction}>
-                {isDesktop && (
-                    <div className={cn(' space-y-3 mt-6 ', {
-                        'px-4': !collapsed || hovered,
-                        'text-center': collapsed || !hovered
-                    })}>
-
-                        <TeamSwitcher />
-                        <SearchBar />
-                    </div>
-
-                )}
-
-                <nav className="mt-8 h-full w-full">
+            <ScrollArea className="[&>div>div[style]]:block!" dir='ltr'>
+                <nav className="h-full w-full">
                     <ul className=" h-full flex flex-col min-h-[calc(100vh-48px-36px-16px-32px)] lg:min-h-[calc(100vh-32px-40px-32px)] items-start space-y-1 px-4">
                         {menuList?.map(({ groupLabel, menus }, index) => (
                             <li className={cn("w-full", groupLabel ? "" : "")} key={index}>
@@ -113,9 +98,7 @@ export function MenuClassic({ }) {
                                                 <TooltipProvider disableHoverableContent>
                                                     <Tooltip delayDuration={100}>
                                                         <TooltipTrigger asChild>
-
                                                             <div>
-
                                                                 <MenuItem label={label} icon={icon} href={href} active={active} id={id} collapsed={collapsed} />
                                                             </div>
                                                         </TooltipTrigger>

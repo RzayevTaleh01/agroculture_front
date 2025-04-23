@@ -125,18 +125,18 @@ const LoginForm = () => {
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <Checkbox id="checkbox" defaultChecked />
-          <Label htmlFor="checkbox">Keep Me Signed In</Label>
+          <Label htmlFor="checkbox">Yadda saxla</Label>
         </div>
-        <Link
-          href="/auth/forgot-password"
-          className="text-sm text-default-800 dark:text-default-400 leading-6 font-medium"
-        >
-          Forgot Password?
-        </Link>
+        {/*<Link*/}
+        {/*  href="/auth/forgot-password"*/}
+        {/*  className="text-sm text-default-800 dark:text-default-400 leading-6 font-medium"*/}
+        {/*>*/}
+        {/*  Forgot Password?*/}
+        {/*</Link>*/}
       </div>
       <Button fullWidth disabled={isPending}>
         {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {isPending ? "Loading..." : "Sign In"}
+        {isPending ? "Loading..." : "Daxil ol"}
       </Button>
     </form>
   );

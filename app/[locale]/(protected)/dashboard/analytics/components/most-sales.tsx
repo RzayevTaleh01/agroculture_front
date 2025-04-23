@@ -42,17 +42,17 @@ const sales = [
 
 const MostSales = () => {
   const [filterMap, setFilterMap] = useState("usa");
-  const t = useTranslations("AnalyticsDashboard");
+  const t = useTranslations("EcommerceDashboard");
   return (
     <Card>
       <CardHeader className="flex flex-row items-center">
-        <CardTitle className="flex-1"> {t("most_sales_map_title")}</CardTitle>
+        <CardTitle className="flex-1">{t("most_sales_map_title")}</CardTitle>
         <div className="border border-default-200 dark:border-default-300  rounded p-1 flex items-center bg-background">
           <span
             className={cn(
               "flex-1 text-sm font-normal px-3 py-1 transition-all duration-150 rounded cursor-pointer",
               {
-                "bg-default-900 text-primary-foreground dark:bg-default-300 dark:text-foreground ":
+                "bg-default-900 text-primary-foreground":
                   filterMap === "global",
               }
             )}
@@ -63,7 +63,7 @@ const MostSales = () => {
           <span
             className={cn(
               "flex-1 text-sm font-normal px-3 py-1 transition-all duration-150 rounded cursor-pointer",
-              { "bg-default-900 text-primary-foreground dark:bg-default-300 dark:text-foreground ": filterMap === "usa" }
+              { "bg-default-900 text-primary-foreground": filterMap === "usa" }
             )}
             onClick={() => setFilterMap("usa")}
           >
@@ -72,48 +72,23 @@ const MostSales = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="md:flex items-center">
-          <div className="flex-none">
-            <h4 className="text-default-600  text-sm font-normal mb-1.5">
-              {t("total_earning_map_desc")}
-            </h4>
-            {filterMap === "usa" && (
-              <div className="text-lg font-medium mb-1.5  text-default-900">
-                $12,65,64787.00
+        <VectorMap {...world} className="h-[280px] w-full dash-codevmap" />
+        <ul className="bg-default-50 rounded p-4 min-w-[184px] mt-8 flex justify-between flex-wrap items-center text-center">
+          {sales.map((item, i) => (
+            <li key={i} className="text-sm text-default-600">
+              <div className="flex items-center gap-2">
+                <span
+                  className={cn(
+                    "inline-flex h-1.5 w-1.5 bg-primary/60 ring-opacity-25 rounded-full ring-4",
+                    item.cls
+                  )}
+                ></span>
+                <span>{item.title}</span>
               </div>
-            )}
-            {filterMap === "global" && (
-              <div className="text-lg font-medium mb-1.5  text-default-900">
-                $12,65.00
-              </div>
-            )}
-            <div className="text-xs font-light">
-              <span className="text-primary">+08%</span>{" "}
-              {t("total_earning_map_desc_2")}
-            </div>
-            <ul className="bg-default-50 rounded p-4 min-w-[184px] space-y-5 mt-4">
-              {sales.map((item, i) => (
-                <li
-                  key={i}
-                  className="flex justify-between text-xs text-default-600"
-                >
-                  <span className="flex gap-2 items-center">
-                    <span
-                      className={` inline-flex h-1.5 w-1.5 bg-primary-500 ring-opacity-25 rounded-full ring-4
-                        ${item.cls}
-                        `}
-                    ></span>
-                    <span>{item.title}</span>
-                  </span>
-                  <span>{item.amount}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex-1 ">
-            <VectorMap {...world} className="dashcode-app-vmap" />
-          </div>
-        </div>
+              <div className="block mt-1">{item.amount}</div>
+            </li>
+          ))}
+        </ul>
       </CardContent>
     </Card>
   );

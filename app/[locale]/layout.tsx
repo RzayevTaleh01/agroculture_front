@@ -7,15 +7,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
 // language
-import { getLangDir } from "rtl-detect";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import DirectionProvider from "@/providers/direction-provider";
 import AuthProvider from "@/providers/auth.provider";
 
 export const metadata: Metadata = {
-  title: "Dashcode admin Template",
-  description: "created by codeshaper",
+  title: "AgroCulture",
+  description: "",
 };
 
 export default async function RootLayout({
@@ -26,10 +25,9 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const messages = await getMessages();
-  const direction = getLangDir(locale);
   return (
-    <html lang={locale} dir={direction}>
-      <body className={`${inter.className} dashcode-app `}>
+    <html lang={locale} dir='ltr'>
+      <body className={`${inter.className}`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AuthProvider>
             <ThemeProvider
@@ -39,7 +37,7 @@ export default async function RootLayout({
               disableTransitionOnChange
             >
               <MountedProvider>
-                <DirectionProvider direction={direction}>
+                <DirectionProvider direction='ltr'>
                   {children}
                 </DirectionProvider>
               </MountedProvider>
